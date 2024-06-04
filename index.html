@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>DAUSOFC</title>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DAUSOFC</title>
   <style>
     body {
       font-family: sans-serif;
       background-image: url("background.jpg");
       background-size: cover;
-      overflow-y: auto;
       margin: 0;
       padding: 0;
       position: relative;
@@ -26,14 +26,42 @@
       opacity: 0;
     }
 
+    .clock {
+      font-size: 25px;
+      color: white;
+      position: absolute;
+      top: 23%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      margin-top: 8px;
+      display: none; /* Initially hidden */
+    }
+
+    .clock.visible {
+      display: block;
+      animation: clock-appear 1s forwards;
+    }
+
+    @keyframes clock-appear {
+      0% {
+        clip-path: inset(0 50% 0 50%);
+      }
+      50% {
+        clip-path: inset(0 0 0 0);
+      }
+      100% {
+        clip-path: inset(0 0 0 0);
+      }
+    }
+
     .creator-text {
       color: white;
       font-size: 15px;
       position: absolute;
-      top: 1098px;
+      bottom: 20px;
       left: 50%;
       transform: translateX(-50%);
-      z-index: -1;
+      z-index: 1;
       animation: fade 2s infinite alternate;
       opacity: 0.8;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
@@ -53,7 +81,7 @@
       overflow: hidden;
       margin: 0 auto;
       background-color: white;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
     }
 
     #profile-pic {
@@ -82,7 +110,7 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      margin-top: 50px;
+      margin-top: 90px;
     }
 
     .button {
@@ -139,17 +167,26 @@
     }
 
     .welcome-container {
-      text-align: center; /* Menengahkan konten */
+      text-align: center;
       color: white;
-      display: flex; /* Tambahkan properti display flex */
-      flex-direction: column; /* Set arah flex menjadi column */
-      justify-content: center; /* Menengahkan konten secara vertikal */
-      align-items: center; /* Menengahkan konten secara horizontal */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
 
     .welcome-text {
       font-size: 36px;
-      animation: fade-in 2s ease;
+      display: block;
+      white-space: pre-wrap; /* Ensures new lines are respected */
+    }
+
+    .welcome-line {
+      display: block;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: .15em solid orange;
+      animation: typing 3s steps(40, end), blink-caret .75s step-end infinite;
     }
 
     @keyframes fade {
@@ -161,25 +198,22 @@
       }
     }
 
-    @keyframes fade-in {
-      0% {
-        opacity: 0;
+    @keyframes typing {
+      from {
+        width: 0;
       }
-      100% {
-        opacity: 1;
+      to {
+        width: 100%;
       }
     }
 
-    .continue-button {
-      margin-top: 20px;
-      padding: 10px 20px;
-      background-color: #fff;
-      color: #000;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      animation: slide-in 1s forwards;
-      display: none; /* hide button initially */
+    @keyframes blink-caret {
+      from, to {
+        border-color: transparent;
+      }
+      50% {
+        border-color: orange;
+      }
     }
 
     @keyframes slide-in {
@@ -192,11 +226,32 @@
         transform: translateY(0);
       }
     }
+
+    @keyframes flicker {
+      0%, 100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.5;
+      }
+    }
+
+    .continue-button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #fff;
+      color: #000;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      display: none;
+      animation: slide-in 1s forwards;
+    }
   </style>
 </head>
 <body>
   <div class="background-text" id="background-text">Welcome to DAUSOFC</div>
-  <div class="creator-text" id="creator-text">Created by dausofc</div>
+  <div class="clock" id="clock"></div>
 
   <header>
     <div class="profile-container">
@@ -217,12 +272,11 @@
           <img src="icon2.png" alt="wa admin" class="button-icon">
           <span class="button-text">WA Admin</span>
         </a>
-        <!-- Tambahkan tombol lainnya di sini -->
-        <a href="t.me/dausofc" class="button">
+        <a href="https://t.me/dausofc" class="button">
           <img src="icon3.png" alt="Telegram" class="button-icon">
           <span class="button-text">Telegram</span>
         </a>
-        <a href="mailto:dausofc00@gmail.com" class="button">
+        <a href="mailto: megidev@dausofc00.my.id" class="button">
           <img src="icon4.png" alt="Gmail" class="button-icon">
           <span class="button-text">Gmail</span>
         </a>
@@ -242,7 +296,7 @@
           <img src="icon8.png" alt="instagram-1" class="button-icon">
           <span class="button-text">Instagram-1</span>
         </a>
-        <a href="https://www.instagram.com/daus_ofc_231?igsh=c3RiZ2JzdDU1MmZu" class="button">
+        <a href="https://www.instagram.com/dausofc?igsh=ZXNnb3I2dG82dnlu" class="button">
           <img src="icon9.png" alt="instagram-2" class="button-icon">
           <span class="button-text">Instagram-2</span>
         </a>
@@ -254,64 +308,105 @@
           <img src="icon11.png" alt="trakteer" class="button-icon">
           <span class="button-text">Trakteer</span>
         </a>
-        <!-- Tambahkan tombol lainnya di sini -->
       </div>
     </main>
   </div>
 
-  <div class="overlay" id="overlay">
+  <div class="creator-text" id="creator-text">Created by dausofc</div>
+
+  <footer>
+    <p class="footer-text">&copy; 2023 dausofc. All rights reserved.</p>
+  </footer>
+
+  <div class="overlay" id="welcome-overlay">
     <div class="welcome-container">
       <div class="welcome-text" id="welcome-text"></div>
       <button class="continue-button" id="continue-button">Lanjutkan</button>
     </div>
   </div>
 
-  <audio id="background-audio" autoplay loop>
-    <source src="audio.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
+  <!-- Add audio element -->
+  <audio id="background-audio" src="audio.mp3"></audio>
 
   <script>
-    window.onload = function() {
-      var welcomeText = document.getElementById("welcome-text");
-      var continueButton = document.getElementById("continue-button");
-      var overlay = document.getElementById("overlay");
-      var audio = document.getElementById("background-audio"); // Menambahkan referensi ke elemen audio
+    // Fungsi untuk mengupdate jam
+    function updateClock() {
+      var now = new Date();
+      var hours = now.getHours();
+      var minutes = now.getMinutes();
+      var seconds = now.getSeconds();
+      hours = hours < 10 ? '0' + hours : hours;
+      minutes = minutes < 10 ? '0' + minutes : minutes;
+      seconds = seconds < 10 ? '0' + seconds : seconds;
+      var timeString = hours + ':' + minutes + ':' + seconds;
+      document.getElementById('clock').textContent = timeString;
+    }
+    setInterval(updateClock, 1000);
 
-      var text = "Selamat datang di DAUSOFC";
+    // Fungsi untuk menampilkan jam dengan animasi
+    function showClock() {
+      var clock = document.getElementById('clock');
+      clock.classList.add('visible'); // Add the visible class to show the clock
+    }
 
-      function typeWriter(text, i, cb) {
+    // Fungsi untuk animasi mengetik teks
+    function typeText(element, text, callback) {
+      let i = 0;
+      const speed = 100; // Kecepatan mengetik dalam milidetik
+
+      function type() {
         if (i < text.length) {
-          welcomeText.innerHTML += text.charAt(i);
+          element.innerHTML += text.charAt(i);
           i++;
-          setTimeout(function() {
-            typeWriter(text, i, cb)
-          }, 100);
+          setTimeout(type, speed);
         } else {
-          cb();
+          callback();
         }
       }
 
-      typeWriter(text, 0, function() {
-        continueButton.style.display = "block"; // tampilkan tombol setelah teks ditampilkan
-      });
+      type();
+    }
 
-      continueButton.addEventListener('click', function() {
-        overlay.style.display = "none";
-        if (audio.paused) { // tambahkan pengecekan apakah audio sedang berjalan
-          audio.play(); // Mulai audio jika belum berjalan
+    // Event listener untuk tombol "Lanjutkan"
+    document.addEventListener("DOMContentLoaded", function() {
+      var overlay = document.getElementById("welcome-overlay");
+      var welcomeText = document.getElementById("welcome-text");
+      var continueButton = document.getElementById("continue-button");
+      var audio = document.getElementById('background-audio');
+
+      overlay.style.display = "flex";
+      continueButton.style.display = "none";
+
+      // Mengatur teks untuk ditampilkan satu per satu dengan jeda
+      const texts = ["Selamat datang\n", "di\n", "dausofc"];
+      let index = 0;
+
+      function displayNextText() {
+        if (index < texts.length) {
+          typeText(welcomeText, texts[index], displayNextText);
+          index++;
+        } else {
+          continueButton.style.display = "inline-block"; // Tampilkan tombol setelah teks selesai
         }
+      }
+
+      displayNextText();
+
+      continueButton.addEventListener("click", function() {
+        overlay.style.display = "none";
+        showClock(); // Menampilkan jam setelah overlay dihilangkan
+        audio.play(); // Memutar audio setelah overlay dihilangkan
       });
 
-      // Pause audio when the window is hidden or minimized
+      // Fungsi untuk menghentikan atau memutar audio saat visibilitas berubah
       document.addEventListener('visibilitychange', function() {
-        if (document.visibilityState === 'hidden') {
+        if (document.hidden) {
           audio.pause();
         } else {
           audio.play();
         }
       });
-    };
+    });
   </script>
 </body>
 </html>
