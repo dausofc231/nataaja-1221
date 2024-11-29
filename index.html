@@ -15,7 +15,7 @@
     }
 
     body {
-      color: #2b2c48;
+      color: white;
       font-family: "Jost", sans-serif;
       background-image: url("https://telegra.ph/file/54fe74aae1199feccc24d.jpg");
       background-repeat: no-repeat;
@@ -27,21 +27,36 @@
       flex-wrap: wrap;
       padding: 20px;
     }
+    
+.card {
+  max-width: 340px;
+  margin: auto;
+  overflow-y: auto;
+  position: relative;
+  z-index: 1;
+  overflow-x: hidden;
+  display: flex;
+  transition: 0.3s;
+  flex-direction: column;
+  border-radius: 10px;
+  box-shadow: 0 0 0 8px rgba(256, 255, 255, 0.2);
+}
 
-    .card {
-      max-width: 340px;
-      margin: auto;
-      overflow-y: auto;
-      position: relative;
-      z-index: 1;
-      overflow-x: hidden;
-      background-color: cyan;
-      display: flex;
-      transition: 0.3s;
-      flex-direction: column;
-      border-radius: 10px;
-      box-shadow: 0 0 0 8px rgba(256, 255, 255, 0.2);
-    }
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('https://tmpfiles.org/dl/16700275/6acaf491e8.jpg');
+  background-size: cover;
+  background-position: center;
+  filter: blur(8px);
+  z-index: -1;
+  border-radius: 10px;
+}
+
 
     .card[data-state="#about"] {
       height: 450px;
@@ -202,19 +217,21 @@
       transition: 0.3s;
     }
 
-    .card-social a {
-      color: #000;
-      height: 32px;
-      width: 32px;
-      border-radius: 50%;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      transition: 0.3s;
-      background-color: rgba(135.206.250);
-      border-radius: 50%;
-      margin-right: 10px;
-    }
+.card-social a {
+  background: linear-gradient(135deg, yellow, red); /* Gradien 3 warna */
+  color: transparent; /* Membuat teks transparan untuk menampilkan gradien */
+  background-clip: text; /* Menerapkan gradien pada teks */
+  -webkit-background-clip: text; /* Untuk browser berbasis Webkit */
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s;
+  background-color: rgba(135, 206, 250, 0.2); /* Latar belakang dengan sedikit transparansi */
+  margin-right: 10px;
+}
 
     .card-social a:hover svg {
       fill: #637faa;
@@ -345,9 +362,9 @@
 
     .card-item-desc {
       font-size: 13px;
-      color: #6f6f7b;
+      color: #D3D3D3;
       line-height: 1.5;
-      font-family: "DM Sans", sans-serif;
+      font-family: "dausofc", sans-serif;
     }
 
     .card-contact-wrapper {
@@ -358,7 +375,7 @@
       display: flex;
       align-items: center;
       font-size: 13px;
-      color: #6f6f7b;
+      color: white;
       font-family: "DM Sans", sans-serif;
       line-height: 1.6;
       cursor: pointer;
@@ -383,7 +400,7 @@
       outline: none;
       background: linear-gradient(to right, rgba(238, 130, 238) 0%, rgba(81, 106, 204, 0.8) 96%);
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
-      color: #fff;
+      color: blue;
       padding: 12px 16px;
       width: 100%;
       border-radius: 5px;
@@ -501,7 +518,7 @@
               </svg>
               dausofc00@gmail.com
             </div>
-            <a href="https://whatsapp.com/channel/0029ValUQJrIHphOR5WTlk3b"><button class="contact-me">channel whatsapp</button></a>
+            <a href="https://whatsapp.com/channel/0029VawR8LS23n3a2RfHhv0q"><button class="contact-me">channel whatsapp</button></a>
           </div>
         </div>
       </div>
@@ -511,16 +528,40 @@
         <button data-section="#contact">CONTACT</button>
       </div>
     </div>
-  </div>
-     <audio id="audio" style="display:none" loop>
-      <source src="https://pomf2.lain.la/f/f85gu59t.jpg" type="audio/mpeg">
-      </audio>
+    
+    <audio id="audio" style="display:none" loop>
+    <source id="audioSource" src="" type="audio/mpeg">
+</audio>
+
+
+
   <!-- partial -->
   <script>
-  function exec() {
-         document.getElementById('audio').play();
-         openFullscreen()
-      }
+const audioFiles = [
+    'MP3/audio1.mp3',
+    'MP3/audio2.mp3',
+    'MP3/audio3.mp3',
+    'MP3/audio4.mp3',
+    'MP3/audio5.mp3'
+];
+
+function getRandomAudio() {
+    const randomIndex = Math.floor(Math.random() * audioFiles.length);
+    return audioFiles[randomIndex];
+}
+
+function exec() {
+    const audioElement = document.getElementById('audio');
+    const audioSource = document.getElementById('audioSource');
+    
+    audioSource.src = getRandomAudio();
+    
+    audioElement.load();
+    
+    audioElement.play();
+}
+
+
       
     const buttons = document.querySelectorAll(".card-buttons button");
     const sections = document.querySelectorAll(".card-section");
