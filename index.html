@@ -49,7 +49,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url('https://tmpfiles.org/dl/16700275/6acaf491e8.jpg');
+  background-image: url("https://files.catbox.moe/wmj4es.jpg");
   background-size: cover;
   background-position: center;
   filter: blur(8px);
@@ -537,6 +537,7 @@
 
   <!-- partial -->
   <script>
+<script>
 const audioFiles = [
     'MP3/audio1.mp3',
     'MP3/audio2.mp3',
@@ -553,42 +554,70 @@ function getRandomAudio() {
 function exec() {
     const audioElement = document.getElementById('audio');
     const audioSource = document.getElementById('audioSource');
+
+    // Mengecek apakah ada audio yang tersimpan di sessionStorage
+    let selectedAudio = sessionStorage.getItem('selectedAudio');
     
-    audioSource.src = getRandomAudio();
+    if (!selectedAudio) {
+        // Jika belum ada, pilih audio secara acak dan simpan
+        selectedAudio = getRandomAudio();
+        sessionStorage.setItem('selectedAudio', selectedAudio);
+    }
     
+    // Menggunakan audio yang tersimpan di sessionStorage
+    audioSource.src = selectedAudio;
     audioElement.load();
-    
     audioElement.play();
 }
 
+// Panggil fungsi exec saat halaman selesai dimuat
+window.addEventListener('load', exec);
 
-      
-    const buttons = document.querySelectorAll(".card-buttons button");
-    const sections = document.querySelectorAll(".card-section");
-    const card = document.querySelector(".card");
-    const handleButtonClick = e => {
-      const targetSection = e.target.getAttribute("data-section");
-      const section = document.querySelector(targetSection);
-      targetSection !== "#about" ?
-        card.classList.add("is-active") :
-        card.classList.remove("is-active");
-      card.setAttribute("data-state", targetSection);
-      sections.forEach(s => s.classList.remove("is-active"));
-      buttons.forEach(b => b.classList.remove("is-active"));
-      e.target.classList.add("is-active");
-      section.classList.add("is-active");
-    };
-    buttons.forEach(btn => {
-      btn.addEventListener("click", handleButtonClick);
-    });
-    function openFullscreen(){let elem=document.documentElement;elem.requestFullscreen?elem.requestFullscreen():elem.mozRequestFullScreen?elem.mozRequestFullScreen():elem.webkitRequestFullscreen?elem.webkitRequestFullscreen():elem.msRequestFullscreen&&elem.msRequestFullscreen()}buttons.forEach((btn=>{btn.addEventListener("click",handleButtonClick)}));
-  </script>
-  <script src="https://cdn.jsdelivr.net/gh/scottschiller/Snowstorm/snowstorm.js" type="text/javascript"></script>
-  <script src="https://cdn.rawgit.com/bungfrangki/efeksalju/2a7805c7/efek-salju.js" type="text/javascript"></script>
-  <div class="footer">
+const buttons = document.querySelectorAll(".card-buttons button");
+const sections = document.querySelectorAll(".card-section");
+const card = document.querySelector(".card");
+
+const handleButtonClick = e => {
+    const targetSection = e.target.getAttribute("data-section");
+    const section = document.querySelector(targetSection);
+
+    targetSection !== "#about"
+        ? card.classList.add("is-active")
+        : card.classList.remove("is-active");
+
+    card.setAttribute("data-state", targetSection);
+    sections.forEach(s => s.classList.remove("is-active"));
+    buttons.forEach(b => b.classList.remove("is-active"));
+
+    e.target.classList.add("is-active");
+    section.classList.add("is-active");
+};
+
+buttons.forEach(btn => {
+    btn.addEventListener("click", handleButtonClick);
+});
+
+function openFullscreen() {
+    let elem = document.documentElement;
+    elem.requestFullscreen
+        ? elem.requestFullscreen()
+        : elem.mozRequestFullScreen
+        ? elem.mozRequestFullScreen()
+        : elem.webkitRequestFullscreen
+        ? elem.webkitRequestFullscreen()
+        : elem.msRequestFullscreen && elem.msRequestFullscreen();
+}
+
+buttons.forEach(btn => {
+    btn.addEventListener("click", handleButtonClick);
+});
+</script>
+<script src="https://cdn.jsdelivr.net/gh/scottschiller/Snowstorm/snowstorm.js" type="text/javascript"></script>
+<script src="https://cdn.rawgit.com/bungfrangki/efeksalju/2a7805c7/efek-salju.js" type="text/javascript"></script>
+<div class="footer">
     <p style="text-align: center;color: white;">
       Copyright : dausofc and megidev
-    </p>
+     </p>
   </div>
 </body>
 
